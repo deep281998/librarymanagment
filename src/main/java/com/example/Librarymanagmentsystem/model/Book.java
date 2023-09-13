@@ -1,14 +1,10 @@
 package com.example.Librarymanagmentsystem.model;
 
-import com.example.Librarymanagmentsystem.Enum.CardStatus;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.example.Librarymanagmentsystem.Enum.Genre;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,27 +14,28 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-
-public class LibraryCard {
+public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    String CardNo;
+    String name;
+
+    int noofpages;
 
     @Enumerated(EnumType.STRING)
-    CardStatus cardStatus;
+    Genre genre;
 
-    @CreationTimestamp
-    Date issuedate;
+    double cost;
 
-    @OneToOne
+    boolean issued;
+
+    @ManyToOne
     @JoinColumn
-    Student student;
+    Author author;
 
-    @OneToMany(mappedBy = "libraryCard" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "book" ,cascade = CascadeType.ALL)
     List<Transaction> transactions = new ArrayList<>();
-
 
 }

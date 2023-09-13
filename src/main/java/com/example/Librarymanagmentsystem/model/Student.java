@@ -1,6 +1,7 @@
 package com.example.Librarymanagmentsystem.model;
 
 import com.example.Librarymanagmentsystem.Enum.Gender;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -23,6 +24,7 @@ public class Student {
 
     int age;
 
+    @Column(unique = true , nullable = false)
     String email;
 
     @Enumerated(EnumType.STRING)
@@ -30,6 +32,7 @@ public class Student {
 
     @OneToOne(mappedBy = "student",cascade = CascadeType.ALL)
     LibraryCard librarycard;
+
 
 
 
